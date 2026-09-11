@@ -66,12 +66,7 @@ export const metadata = {
 export default async function HomePage() {
   // Fetch dynamic data from Strapi CMS
   const [homepageRes, servicesRes, articlesRes, socialsRes] = await Promise.allSettled([
-    fetchAPI('/homepage', {
-      'populate[heroImage]': '*',
-      'populate[testimonialAvatar]': '*',
-      'populate[stats]': '*',
-      'populate[seo][populate]': '*',
-    }),
+    fetchAPI('/homepage', { populate: '*' }),
     fetchAPI('/services', { populate: '*', sort: 'order:asc' }),
     fetchAPI('/articles', { populate: '*', sort: 'publishedDate:desc', 'pagination[limit]': '3' }),
     fetchAPI('/social-feed-items', { populate: '*', sort: 'order:asc' }),

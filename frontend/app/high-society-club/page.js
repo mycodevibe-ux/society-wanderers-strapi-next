@@ -22,10 +22,7 @@ export const metadata = {
 
 export default async function HighSocietyClubPage() {
   const [clubRes, benefitsRes] = await Promise.allSettled([
-    fetchAPI('/high-society-club', {
-      'populate[heroImage]': '*',
-      'populate[membershipImage]': '*',
-    }),
+    fetchAPI('/high-society-club', { populate: '*' }),
     fetchAPI('/club-benefits', { sort: 'order:asc' }),
   ]);
 

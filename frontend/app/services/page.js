@@ -24,7 +24,7 @@ export const metadata = {
 
 export default async function ServicesPage() {
   const [pageRes, servicesRes] = await Promise.allSettled([
-    fetchAPI('/services-page', { 'populate[heroImage]': '*' }),
+    fetchAPI('/services-page', { populate: '*' }),
     fetchAPI('/services', { populate: '*', sort: 'order:asc' }),
   ]);
 

@@ -28,13 +28,7 @@ export const metadata = {
 
 export default async function AboutPage() {
   const [aboutRes, socialsRes] = await Promise.allSettled([
-    fetchAPI('/about-page', {
-      'populate[heroImage]': '*',
-      'populate[founderImage]': '*',
-      'populate[travelStyleImage]': '*',
-      'populate[panoramaImage]': '*',
-      'populate[stats]': '*',
-    }),
+    fetchAPI('/about-page', { populate: '*' }),
     fetchAPI('/social-feed-items', { populate: '*', sort: 'order:asc' }),
   ]);
 

@@ -30,7 +30,7 @@ export const metadata = {
 
 export default async function JournalPage() {
   const [pageRes, articlesRes] = await Promise.allSettled([
-    fetchAPI('/journal-page', { 'populate[heroImage]': '*' }),
+    fetchAPI('/journal-page', { populate: '*' }),
     fetchAPI('/articles', { populate: '*', sort: 'publishedDate:desc' }),
   ]);
 

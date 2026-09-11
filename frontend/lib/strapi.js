@@ -15,8 +15,10 @@ export async function fetchAPI(path, params = {}, options = {}) {
     }
   });
 
+  const isDev = process.env.NODE_ENV !== 'production';
   const defaultOptions = {
-    next: { revalidate: 60 },
+    next: { revalidate: isDev ? 0 : 30 },
+    cache: isDev ? 'no-store' : 'default',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -68,7 +70,10 @@ export function getStrapiMedia(media, fallback = '/images/share-card.jpg') {
   const { url } = media?.data?.attributes || media?.attributes || media || {};
   if (!url) return fallback;
   
-  if (url.startsWith('http') || url.startsWith('//')) return url;
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return url;
+  }
+  
   return `${STRAPI_URL}${url}`;
 }
 
@@ -92,23 +97,23 @@ export function getStrapiImageProps(media, fallback = '/images/share-card.jpg') 
 /* ----- Convenience fetchers for each content type ----- */
 
 export async function getHomepage() {
-  return fetchAPI('/homepage', { 'populate': 'deep' });
+  return fetchAPI('/homepage', { 'populate': '*' });
 }
 
 export async function getAboutPage() {
-  return fetchAPI('/about-page', { 'populate': 'deep' });
+  return fetchAPI('/about-page', { 'populate': '*' });
 }
 
 export async function getServicesPage() {
-  return fetchAPI('/services-page', { 'populate': 'deep' });
+  return fetchAPI('/services-page', { 'populate': '*' });
 }
 
 export async function getHighSocietyClub() {
-  return fetchAPI('/high-society-club', { 'populate': 'deep' });
+  return fetchAPI('/high-society-club', { 'populate': '*' });
 }
 
 export async function getJournalPage() {
-  return fetchAPI('/journal-page', { 'populate': 'deep' });
+  return fetchAPI('/journal-page', { 'populate': '*' });
 }
 
 export async function getServices() {
