@@ -1,0 +1,198 @@
+.page {
+  background-color: var(--color-navy);
+  padding-top: calc(var(--header-height) + var(--space-3xl));
+  padding-bottom: var(--space-4xl);
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: var(--space-4xl);
+  align-items: start;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+  position: sticky;
+  top: calc(var(--header-height) + var(--space-2xl));
+}
+
+.pageTitle {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 0.95;
+  color: var(--color-white);
+  margin-bottom: var(--space-xl);
+}
+
+.pageSubtitle {
+  font-family: var(--font-accent);
+  font-size: 1.5rem;
+  font-style: italic;
+  color: var(--color-gold-light);
+  margin-bottom: var(--space-xl);
+}
+
+.pageDescription {
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: var(--color-text-light);
+  margin-bottom: var(--space-2xl);
+}
+
+.directContact {
+  margin-top: var(--space-2xl);
+}
+
+.directLabel {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--color-gold);
+  margin-bottom: var(--space-sm);
+}
+
+.directEmail {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--color-white);
+}
+
+/* --- Form --- */
+.form {
+  max-width: 800px;
+}
+
+.disclaimer {
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-xl);
+}
+
+/* --- Thank You --- */
+.thankYou {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: calc(var(--header-height) + var(--space-3xl)) var(--space-xl) var(--space-4xl);
+  background-color: var(--color-navy);
+}
+
+.thankYouCard {
+  max-width: 640px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(209, 168, 102, 0.25);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+  padding: 3.5rem 2.5rem;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.thankYouKicker {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #D1A866;
+  margin-bottom: 1.25rem;
+  font-weight: 500;
+}
+
+.thankYou h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  line-height: 1.15;
+  color: var(--color-white);
+  margin-bottom: 1rem;
+}
+
+.thankYouRefBadge {
+  display: inline-block;
+  background: rgba(209, 168, 102, 0.1);
+  border: 1px solid rgba(209, 168, 102, 0.35);
+  color: #E2BC7A;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  padding: 0.4rem 1.2rem;
+  border-radius: 2px;
+  margin-bottom: 1.5rem;
+}
+
+.thankYou p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--color-text-light);
+  max-width: 520px;
+  margin-bottom: 2rem;
+}
+
+.thankYouActions {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (max-width: 1024px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+  
+  .sidebar {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--space-md);
+  }
+
+  .page {
+    padding-top: calc(var(--header-height) + 1.5rem);
+    padding-bottom: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  .pageTitle {
+    font-size: clamp(2rem, 8.5vw, 2.8rem);
+  }
+
+  .pageSubtitle {
+    font-size: 1.2rem;
+  }
+
+  .thankYouCard {
+    padding: 2rem 1.15rem;
+  }
+
+  .thankYouActions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .thankYouActions a {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+}

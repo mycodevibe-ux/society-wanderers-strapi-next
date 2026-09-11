@@ -1,0 +1,515 @@
+.container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+/* Filter Navigation */
+.filterSection {
+  background-color: #08101E;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  position: sticky;
+  top: 70px;
+  z-index: 100;
+  backdrop-filter: blur(12px);
+}
+
+.filterNav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.75rem, 2vw, 2.5rem);
+  flex-wrap: wrap;
+}
+
+.filterBtn {
+  background: transparent;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #8A95A5;
+  padding: 0.5rem 1rem;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.filterBtn:hover {
+  color: #D1A866;
+}
+
+.filterBtnActive {
+  color: #0B1527;
+  background-color: #D1A866;
+  font-weight: 600;
+}
+
+/* Destinations Section */
+.destinationsSection {
+  background-color: var(--color-navy);
+  padding: var(--space-4xl) 0;
+}
+
+.destinationsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1.5rem, 3vw, 3rem);
+}
+
+.destinationCard {
+  background-color: #0F1D33;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.destinationCard:hover {
+  transform: translateY(-6px);
+  border-color: rgba(209, 168, 102, 0.4);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+}
+
+.cardImageWrapper {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.destinationCard:hover .cardImage {
+  transform: scale(1.05);
+}
+
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(11, 21, 39, 0.1) 0%, rgba(11, 21, 39, 0.75) 100%);
+}
+
+.tagBadge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(11, 21, 39, 0.75);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(209, 168, 102, 0.4);
+  color: #D1A866;
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.75rem;
+  border-radius: 2px;
+}
+
+.seasonBadge {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  display: inline-flex;
+  align-items: center;
+  background: rgba(11, 21, 39, 0.85);
+  backdrop-filter: blur(6px);
+  color: #E2E8F0;
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.65rem;
+  border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cardBody {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.cardHeader {
+  margin-bottom: 1.25rem;
+}
+
+.locationMeta {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #D1A866;
+  margin-bottom: 0.4rem;
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2vw, 1.85rem);
+  font-weight: 400;
+  color: var(--color-white);
+  line-height: 1.2;
+  margin-bottom: 0.45rem;
+}
+
+.cardTagline {
+  font-family: var(--font-accent);
+  font-size: 1.05rem;
+  font-style: italic;
+  color: #CBD5E1;
+  line-height: 1.4;
+}
+
+.cardDescription {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: #94A3B8;
+  font-weight: 300;
+  margin-bottom: 1.75rem;
+}
+
+.highlightsBox {
+  background-color: rgba(6, 14, 26, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-sm);
+  padding: 1.15rem 1.25rem;
+  margin-bottom: 1.75rem;
+  margin-top: auto;
+}
+
+.highlightsHeading {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  font-weight: 600;
+  color: #D1A866;
+  margin-bottom: 0.65rem;
+}
+
+.highlightsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.highlightsList li {
+  position: relative;
+  padding-left: 1.15rem;
+  font-family: var(--font-body);
+  font-size: 0.76rem;
+  color: #CBD5E1;
+  line-height: 1.5;
+}
+
+.highlightsList li::before {
+  content: "✦";
+  position: absolute;
+  left: 0;
+  color: #D1A866;
+  font-size: 0.65rem;
+  top: 0.05em;
+}
+
+.cardCta {
+  margin-top: 0.5rem;
+}
+
+.inquireBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: transparent;
+  color: #D1A866;
+  border: 1px solid rgba(209, 168, 102, 0.5);
+  padding: 0.85rem 1.25rem;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: all var(--transition-base);
+}
+
+.inquireBtn:hover {
+  background-color: #D1A866;
+  color: #0B1527;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(209, 168, 102, 0.25);
+}
+
+/* Sovereign Portfolio Spotlight */
+.buyoutSection {
+  background-color: #060E1A;
+  padding: var(--space-4xl) 0;
+  border-top: 1px solid rgba(209, 168, 102, 0.2);
+  border-bottom: 1px solid rgba(209, 168, 102, 0.2);
+}
+
+.buyoutCard {
+  background: linear-gradient(135deg, rgba(15, 29, 51, 0.9) 0%, rgba(6, 14, 26, 0.95) 100%);
+  border: 1px solid rgba(209, 168, 102, 0.35);
+  border-radius: var(--radius-sm);
+  padding: clamp(2rem, 5vw, 4rem);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.buyoutCard::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(209, 168, 102, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.buyoutTag {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #D1A866;
+  margin-bottom: 0.75rem;
+}
+
+.buyoutTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 400;
+  color: var(--color-white);
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.buyoutText {
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 1.1vw, 1.05rem);
+  line-height: 1.8;
+  color: #CBD5E1;
+  font-weight: 300;
+  max-width: 900px;
+  margin-bottom: 2.5rem;
+}
+
+.buyoutStatsRow {
+  display: flex;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.buyoutStat {
+  display: flex;
+  flex-direction: column;
+}
+
+.buyoutStatNum {
+  font-family: var(--font-accent);
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 400;
+  color: #D1A866;
+  line-height: 1;
+  margin-bottom: 0.35rem;
+}
+
+.buyoutStatLabel {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #8A95A5;
+}
+
+.buyoutCtaRow {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.btnGold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #D1A866;
+  color: #0B1527;
+  padding: 0.95rem 2rem;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  border: 1px solid #D1A866;
+  transition: all var(--transition-base);
+}
+
+.btnGold:hover {
+  background-color: #E2BC7A;
+  border-color: #E2BC7A;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(209, 168, 102, 0.35);
+}
+
+/* Consultation Banner */
+.ctaBanner {
+  background-color: var(--color-navy);
+  padding: var(--space-4xl) 0;
+  text-align: center;
+}
+
+.ctaBannerContent {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.ctaBadge {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #D1A866;
+  margin-bottom: 1rem;
+}
+
+.ctaBannerTitle {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 400;
+  color: var(--color-white);
+  line-height: 1.2;
+  margin-bottom: 1.25rem;
+}
+
+.ctaBannerSubtitle {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #94A3B8;
+  font-weight: 300;
+  margin-bottom: 2.5rem;
+}
+
+.btnGoldLarge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #D4AF67;
+  color: #0B1527;
+  padding: 1.05rem 2.5rem;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  border: 1px solid #D4AF67;
+  transition: all var(--transition-base);
+}
+
+.btnGoldLarge:hover {
+  background-color: #E2BC7A;
+  border-color: #E2BC7A;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(209, 168, 102, 0.4);
+}
+
+@media (max-width: 900px) {
+  .destinationsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .filterNav {
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.5rem;
+    scrollbar-width: none;
+  }
+
+  .filterNav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filterBtn {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .buyoutStatsRow {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .filterSection {
+    top: 54px;
+    padding: 1rem 0;
+  }
+
+  .destinationsSection,
+  .buyoutSection,
+  .ctaBanner {
+    padding: 2.75rem 0;
+  }
+
+  .cardBody {
+    padding: 1.5rem 1.15rem;
+  }
+
+  .cardTitle {
+    font-size: 1.45rem;
+  }
+
+  .buyoutCard {
+    padding: 1.75rem 1.2rem;
+  }
+
+  .buyoutTitle {
+    font-size: 1.65rem;
+  }
+
+  .buyoutStatsRow {
+    gap: 1.5rem;
+  }
+
+  .buyoutCtaRow {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btnGold,
+  .btnGoldLarge {
+    width: 100%;
+    text-align: center;
+    padding: 0.85rem 1.5rem;
+  }
+}

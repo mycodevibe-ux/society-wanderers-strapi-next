@@ -1,0 +1,241 @@
+.pageWrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #060E1A;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 8rem 0 6rem;
+  background: radial-gradient(ellipse at 50% 40%, rgba(15, 29, 51, 0.95) 0%, #060E1A 85%);
+}
+
+.watermarkWrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0.04;
+  z-index: 1;
+}
+
+.watermarkLogo {
+  width: clamp(350px, 45vw, 650px);
+  height: auto;
+  display: block;
+}
+
+.ambientGlow {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(300px, 40vw, 550px);
+  height: clamp(300px, 40vw, 550px);
+  background: radial-gradient(circle, rgba(209, 168, 102, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.statusBadge {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #D1A866;
+  margin-bottom: 1.25rem;
+  padding: 0.35rem 1rem;
+  border: 1px solid rgba(209, 168, 102, 0.35);
+  border-radius: 2px;
+  background: rgba(11, 21, 39, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+.errorCode {
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 14vw, 10.5rem);
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: 0.05em;
+  margin: 0 0 1rem 0;
+  background: linear-gradient(180deg, #FFFFFF 20%, #D1A866 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+.errorTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 400;
+  color: var(--color-white);
+  letter-spacing: 0.06em;
+  margin: 0 0 1rem 0;
+}
+
+.errorQuote {
+  font-family: var(--font-accent);
+  font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+  font-style: italic;
+  color: #D1A866;
+  margin: 0 0 1.25rem 0;
+  line-height: 1.5;
+}
+
+.errorDescription {
+  font-family: var(--font-body);
+  font-size: clamp(0.85rem, 1.05vw, 0.95rem);
+  line-height: 1.8;
+  color: #94A3B8;
+  font-weight: 300;
+  max-width: 620px;
+  margin: 0 0 2.5rem 0;
+}
+
+.actionRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-bottom: 3.5rem;
+}
+
+.btnGold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #D4AF67;
+  color: #0B1527;
+  padding: 0.85rem 1.85rem;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  border: 1px solid #D4AF67;
+  transition: all var(--transition-base);
+  height: 44px;
+}
+
+.btnGold:hover {
+  background-color: #E2BC7A;
+  border-color: #E2BC7A;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(209, 168, 102, 0.35);
+}
+
+.btnOutline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: #CBD5E1;
+  padding: 0.85rem 1.75rem;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: all var(--transition-base);
+  height: 44px;
+}
+
+.btnOutline:hover {
+  border-color: #D1A866;
+  color: #D1A866;
+  transform: translateY(-2px);
+}
+
+.directoryBox {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 2rem;
+  width: 100%;
+}
+
+.directoryLabel {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  font-weight: 600;
+  color: #64748B;
+  text-transform: uppercase;
+  margin-bottom: 0.85rem;
+}
+
+.directoryLinks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.dirLink {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: #8A95A5;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.25s ease;
+}
+
+.dirLink:hover {
+  color: #D1A866;
+}
+
+.dirSep {
+  color: #475569;
+  font-size: 0.65rem;
+}
+
+@media (max-width: 600px) {
+  .main {
+    padding: 7rem 0 4rem;
+  }
+
+  .actionRow {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btnGold, .btnOutline {
+    width: 100%;
+  }
+
+  .directoryLinks {
+    gap: 0.75rem;
+  }
+}

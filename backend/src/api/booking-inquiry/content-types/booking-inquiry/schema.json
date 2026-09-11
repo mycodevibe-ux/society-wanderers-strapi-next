@@ -1,0 +1,60 @@
+{
+  "kind": "collectionType",
+  "collectionName": "booking_inquiries",
+  "info": {
+    "singularName": "booking-inquiry",
+    "pluralName": "booking-inquiries",
+    "displayName": "Booking Inquiry",
+    "description": "Begin Your Journey form submissions"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "fullName": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "phone": {
+      "type": "string"
+    },
+    "referralSource": {
+      "type": "string"
+    },
+    "destination": {
+      "type": "string"
+    },
+    "travelDates": {
+      "type": "string"
+    },
+    "partySize": {
+      "type": "string"
+    },
+    "investmentRange": {
+      "type": "string"
+    },
+    "experienceInterests": {
+      "type": "string"
+    },
+    "accommodationPreference": {
+      "type": "string"
+    },
+    "travelPace": {
+      "type": "string"
+    },
+    "serviceLevel": {
+      "type": "string"
+    },
+    "celebrations": {
+      "type": "string"
+    },
+    "additionalNotes": {
+      "type": "text"
+    }
+  }
+}

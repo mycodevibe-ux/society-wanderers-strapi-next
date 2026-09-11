@@ -1,0 +1,79 @@
+{
+  "kind": "singleType",
+  "collectionName": "homepages",
+  "info": {
+    "singularName": "homepage",
+    "pluralName": "homepages",
+    "displayName": "Homepage",
+    "description": "HSW Global home page content"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "heroTitle": {
+      "type": "string",
+      "required": true,
+      "default": "HSW GLOBAL"
+    },
+    "heroSubtitle": {
+      "type": "text",
+      "required": true,
+      "default": "Private Travel Advisory for the Exceptionally Well Traveled"
+    },
+    "heroImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "signatureServiceTitle": {
+      "type": "string",
+      "default": "SIGNATURE SERVICE"
+    },
+    "clubSectionTitle": {
+      "type": "string",
+      "default": "THE HIGH SOCIETY CLUB"
+    },
+    "clubDescription": {
+      "type": "richtext"
+    },
+    "testimonialQuote": {
+      "type": "text",
+      "default": "Working With Loren At HSW Global Made This Trip Completely Seamless From Start To Finish. Every Detail Was Thoughtfully Planned, Allowing Us To Fully Relax And Enjoy The Experience Without Any Stress."
+    },
+    "testimonialAuthor": {
+      "type": "string",
+      "default": "Lazarena A."
+    },
+    "testimonialRole": {
+      "type": "string",
+      "default": "Private Client"
+    },
+    "testimonialAvatar": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "stats": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.stat"
+    },
+    "journalSectionTitle": {
+      "type": "string",
+      "default": "THE JOURNAL"
+    },
+    "socialFeedTitle": {
+      "type": "string",
+      "default": "SOCIAL FEED"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    }
+  }
+}

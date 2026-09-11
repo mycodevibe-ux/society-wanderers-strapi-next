@@ -1,0 +1,36 @@
+{
+  "kind": "singleType",
+  "collectionName": "journal_pages",
+  "info": {
+    "singularName": "journal-page",
+    "pluralName": "journal-pages",
+    "displayName": "Journal Page",
+    "description": "Journal/Blog landing page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "heroTitle": {
+      "type": "string",
+      "required": true,
+      "default": "NOTES FROM THE ROAD"
+    },
+    "heroSubtitle": {
+      "type": "text",
+      "default": "Essays, field notes, and quiet recommendations written for the well traveled."
+    },
+    "heroImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    }
+  }
+}

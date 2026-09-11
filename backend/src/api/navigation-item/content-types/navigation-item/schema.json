@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "navigation_items",
+  "info": {
+    "singularName": "navigation-item",
+    "pluralName": "navigation-items",
+    "displayName": "Navigation Item",
+    "description": "Header navigation links"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "url": {
+      "type": "string",
+      "required": true
+    },
+    "order": {
+      "type": "integer",
+      "required": true,
+      "default": 0
+    },
+    "isButton": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

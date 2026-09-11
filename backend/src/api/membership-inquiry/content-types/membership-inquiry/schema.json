@@ -1,0 +1,63 @@
+{
+  "kind": "collectionType",
+  "collectionName": "membership_inquiries",
+  "info": {
+    "singularName": "membership-inquiry",
+    "pluralName": "membership-inquiries",
+    "displayName": "Membership Inquiry",
+    "description": "High Society Club membership application submissions"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "fullName": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "phone": {
+      "type": "string"
+    },
+    "cityState": {
+      "type": "string"
+    },
+    "occupation": {
+      "type": "string"
+    },
+    "referralSource": {
+      "type": "string"
+    },
+    "travelFrequency": {
+      "type": "string"
+    },
+    "travelCompanion": {
+      "type": "string"
+    },
+    "partySize": {
+      "type": "string"
+    },
+    "travelStyle": {
+      "type": "string"
+    },
+    "membershipInterests": {
+      "type": "string"
+    },
+    "expectations": {
+      "type": "string"
+    },
+    "pace": {
+      "type": "string"
+    },
+    "supportLevel": {
+      "type": "string"
+    },
+    "additionalNotes": {
+      "type": "text"
+    }
+  }
+}

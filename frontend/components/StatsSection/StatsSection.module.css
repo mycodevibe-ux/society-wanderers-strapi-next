@@ -1,0 +1,111 @@
+.statsRow {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: clamp(2rem, 5vw, 5rem);
+  padding: var(--space-3xl) 0;
+  width: 100%;
+}
+
+.statItem {
+  text-align: center;
+  flex: 1;
+  max-width: 220px;
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.statItemVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.valueWrapper {
+  position: relative;
+  display: inline-block;
+  margin-bottom: var(--space-sm);
+}
+
+.value {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #FFFFFF 0%, #E2CFAB 40%, #C9A96E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.statItem:hover .value {
+  transform: scale(1.06);
+}
+
+.accentLine {
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+  margin: 0.6rem auto 0.75rem;
+  transition: width 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+}
+
+.statItemVisible .accentLine {
+  width: 48px;
+}
+
+.label {
+  font-size: 0.68rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--color-text-muted);
+  transition: color 0.3s ease, letter-spacing 0.3s ease;
+}
+
+.statItem:hover .label {
+  color: var(--color-gold-light);
+  letter-spacing: 0.26em;
+}
+
+@media (max-width: 1024px) {
+  .statsRow {
+    gap: var(--space-2xl);
+  }
+}
+
+@media (max-width: 768px) {
+  .statsRow {
+    flex-wrap: wrap;
+    gap: var(--space-xl);
+    justify-content: space-around;
+  }
+  
+  .statItem {
+    flex: 0 0 42%;
+    max-width: none;
+    margin-bottom: var(--space-md);
+  }
+  
+  .value {
+    font-size: 2.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .statItem {
+    flex: 0 0 45%;
+  }
+  
+  .value {
+    font-size: 2rem;
+  }
+  
+  .label {
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+  }
+}

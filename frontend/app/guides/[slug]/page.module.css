@@ -1,0 +1,552 @@
+.pageWrapper {
+  background-color: var(--color-navy);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+}
+
+/* --- Header Section --- */
+.header {
+  padding-top: calc(var(--header-height) + var(--space-2xl));
+  padding-bottom: var(--space-3xl);
+  background: linear-gradient(to bottom, rgba(6, 14, 26, 0.95), var(--color-navy));
+}
+
+.topMetaRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.backLink {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  transition: color var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.backLink:hover {
+  color: var(--color-gold);
+}
+
+.issueBadge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--color-gold);
+  border: 1px solid rgba(201, 169, 110, 0.4);
+  padding: 0.25rem 0.8rem;
+  text-transform: uppercase;
+}
+
+.headerContent {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto var(--space-3xl);
+}
+
+.categoryLabel {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--color-gold);
+  text-transform: uppercase;
+  margin-bottom: var(--space-md);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4.5vw, 4rem);
+  line-height: 1.1;
+  color: var(--color-white);
+  margin-bottom: var(--space-lg);
+}
+
+.subtitle {
+  font-family: var(--font-accent);
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
+  font-style: italic;
+  color: var(--color-gold-light);
+  line-height: 1.4;
+  margin-bottom: var(--space-xl);
+}
+
+.curatorMeta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-md);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  color: var(--color-text-muted);
+}
+
+.metaDot {
+  color: var(--color-gold);
+}
+
+/* --- Hero Media --- */
+.heroMediaContainer {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+}
+
+.heroMediaWrapper {
+  position: relative;
+  width: 100%;
+  height: clamp(380px, 50vw, 620px);
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(201, 169, 110, 0.25);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.heroMediaOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(6, 14, 26, 0.7) 0%, transparent 60%);
+}
+
+.heroCaption {
+  position: absolute;
+  bottom: var(--space-lg);
+  left: var(--space-xl);
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  color: var(--color-gold-light);
+  text-transform: uppercase;
+}
+
+/* --- Main Content Body --- */
+.main {
+  padding-top: var(--space-4xl);
+  padding-bottom: var(--space-4xl);
+}
+
+.leadBox {
+  max-width: 860px;
+  margin: 0 auto var(--space-3xl);
+  padding-bottom: var(--space-2xl);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.leadParagraph {
+  font-family: var(--font-accent);
+  font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--color-white);
+  text-align: center;
+}
+
+.narrativeBody {
+  max-width: 800px;
+  margin: 0 auto var(--space-4xl);
+}
+
+.bodyParagraph {
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: var(--color-text-light);
+  margin-bottom: var(--space-xl);
+}
+
+.firstParagraph::first-letter {
+  font-family: var(--font-display);
+  font-size: 3.6rem;
+  float: left;
+  line-height: 0.8;
+  padding-right: 0.75rem;
+  padding-top: 0.2rem;
+  color: var(--color-gold);
+}
+
+/* --- Visual Breakpoint --- */
+.visualBreak {
+  max-width: 1000px;
+  margin: var(--space-3xl) auto var(--space-4xl);
+  text-align: center;
+}
+
+.breakImage {
+  width: 100%;
+  height: clamp(300px, 35vw, 480px);
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(201, 169, 110, 0.2);
+  margin-bottom: var(--space-sm);
+}
+
+.breakCaption {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* --- Address Book --- */
+.addressBookSection {
+  margin: var(--space-4xl) 0;
+  padding: var(--space-4xl) 0;
+  border-top: 1px solid var(--color-border-light);
+  border-bottom: 1px solid var(--color-border-light);
+  background: rgba(6, 14, 26, 0.5);
+}
+
+.addressBookHeader {
+  text-align: center;
+  max-width: 750px;
+  margin: 0 auto var(--space-3xl);
+}
+
+.kicker {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--color-gold);
+  text-transform: uppercase;
+  margin-bottom: var(--space-xs);
+}
+
+.addressBookTitle {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  color: var(--color-white);
+  margin-bottom: var(--space-sm);
+}
+
+.addressBookSub {
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+}
+
+.addressGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-xl);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.addressCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(201, 169, 110, 0.2);
+  padding: var(--space-2xl);
+  border-radius: var(--radius-sm);
+  transition: border-color var(--transition-base), transform var(--transition-base);
+}
+
+.addressCard:hover {
+  border-color: var(--color-gold);
+  transform: translateY(-2px);
+}
+
+.addressCardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-md);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.addressType {
+  color: var(--color-gold);
+  font-weight: 600;
+}
+
+.addressDistrict {
+  color: var(--color-text-muted);
+}
+
+.addressName {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: var(--color-white);
+  margin-bottom: var(--space-sm);
+}
+
+.addressDetail {
+  font-size: 0.86rem;
+  line-height: 1.7;
+  color: var(--color-text-light);
+  margin: 0;
+}
+
+/* --- Protocol Section --- */
+.protocolSection {
+  max-width: 1000px;
+  margin: var(--space-4xl) auto;
+}
+
+.protocolCard {
+  background: rgba(6, 14, 26, 0.75);
+  border: 1px solid var(--color-gold);
+  padding: var(--space-3xl) var(--space-4xl);
+}
+
+.protocolKicker {
+  display: block;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--color-gold);
+  text-transform: uppercase;
+  margin-bottom: var(--space-xs);
+}
+
+.protocolTitle {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: var(--color-white);
+  margin-bottom: var(--space-2xl);
+}
+
+.protocolGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2xl);
+}
+
+.protocolItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.protocolLabel {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--color-gold);
+  text-transform: uppercase;
+  margin-bottom: var(--space-xs);
+}
+
+.protocolVal {
+  font-size: 0.84rem;
+  line-height: 1.6;
+  color: var(--color-text-light);
+  margin: 0;
+}
+
+/* --- Commission Dossier Section --- */
+.dossierSection {
+  max-width: 900px;
+  margin: var(--space-4xl) auto;
+}
+
+.dossierBox {
+  background: linear-gradient(135deg, rgba(6, 14, 26, 0.9), rgba(11, 21, 39, 0.85));
+  border: 1px solid rgba(201, 169, 110, 0.35);
+  padding: var(--space-4xl) var(--space-3xl);
+  text-align: center;
+}
+
+.dossierBadge {
+  display: inline-block;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--color-gold);
+  border: 1px solid rgba(201, 169, 110, 0.4);
+  padding: 0.3rem 0.9rem;
+  margin-bottom: var(--space-md);
+}
+
+.dossierHeading {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  color: var(--color-white);
+  margin-bottom: var(--space-md);
+}
+
+.dossierText {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  max-width: 680px;
+  margin: 0 auto var(--space-2xl);
+}
+
+.dossierCtaRow {
+  display: flex;
+  justify-content: center;
+}
+
+/* --- Related Section --- */
+.relatedSection {
+  margin-top: var(--space-4xl);
+  padding-top: var(--space-4xl);
+  border-top: 1px solid var(--color-border-light);
+}
+
+.relatedTitle {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  text-align: center;
+  margin-bottom: var(--space-3xl);
+}
+
+.relatedGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+}
+
+.relatedCard {
+  text-decoration: none;
+  display: block;
+}
+
+.relatedMedia {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(201, 169, 110, 0.2);
+  margin-bottom: var(--space-md);
+}
+
+.relatedImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-elegant);
+}
+
+.relatedCard:hover .relatedImage {
+  transform: scale(1.05);
+}
+
+.relatedOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(6, 14, 26, 0.7) 0%, transparent 60%);
+}
+
+.relatedBadge {
+  position: absolute;
+  bottom: var(--space-sm);
+  left: var(--space-sm);
+  font-size: 0.58rem;
+  letter-spacing: 0.15em;
+  color: var(--color-gold);
+  text-transform: uppercase;
+}
+
+.relatedBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.relatedBody span {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: var(--color-text-muted);
+}
+
+.relatedCardTitle {
+  font-family: var(--font-accent);
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--color-white);
+  line-height: 1.3;
+}
+
+@media (max-width: 1024px) {
+  .addressGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .protocolGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .relatedGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .relatedGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .curatorMeta {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container,
+  .heroMediaContainer {
+    padding: 0 1rem;
+  }
+
+  .header {
+    padding-top: calc(var(--header-height) + 1.25rem);
+    padding-bottom: 2rem;
+  }
+
+  .topMetaRow {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+
+  .title {
+    font-size: clamp(1.8rem, 8.5vw, 2.4rem);
+  }
+
+  .subtitle {
+    font-size: 1.05rem;
+  }
+
+  .heroMediaWrapper {
+    height: clamp(240px, 48vw, 320px);
+  }
+
+  .heroCaption {
+    left: 0.75rem;
+    bottom: 0.75rem;
+    font-size: 0.55rem;
+  }
+
+  .main {
+    padding-top: 2.25rem;
+    padding-bottom: 2.25rem;
+  }
+
+  .addressCard,
+  .protocolItem {
+    padding: 1.25rem 1rem;
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "social_feed_items",
+  "info": {
+    "singularName": "social-feed-item",
+    "pluralName": "social-feed-items",
+    "displayName": "Social Feed Item",
+    "description": "Instagram social feed images"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "caption": {
+      "type": "string"
+    },
+    "instagramUrl": {
+      "type": "string"
+    },
+    "order": {
+      "type": "integer",
+      "required": true,
+      "default": 0
+    }
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "kind": "singleType",
+  "collectionName": "about_pages",
+  "info": {
+    "singularName": "about-page",
+    "pluralName": "about-pages",
+    "displayName": "About Page",
+    "description": "About / Team page content"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "heroTitle": {
+      "type": "string",
+      "required": true,
+      "default": "A PRIVATE ADVISORY"
+    },
+    "heroSubtitle": {
+      "type": "text",
+      "default": "HSW Global was founded on a simple conviction: the most demanding travelers in the world deserve a single, trusted hand"
+    },
+    "heroImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "founderName": {
+      "type": "string",
+      "default": "LOREN BUCKLES"
+    },
+    "founderStory": {
+      "type": "richtext",
+      "required": true
+    },
+    "founderImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "travelStyleTitle": {
+      "type": "string",
+      "default": "Travel Style"
+    },
+    "travelStyleText": {
+      "type": "richtext"
+    },
+    "travelStyleImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "quote": {
+      "type": "text",
+      "default": "We Don't Just Book Trips We Build Journeys People Remember For Life. We Don't Just Plan Trips We Design Unforgettable Life Chapters"
+    },
+    "quoteAttribution": {
+      "type": "string",
+      "default": "LOREN BUCKLES, FOUNDER, HSW GLOBAL"
+    },
+    "panoramaImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "stats": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.stat"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    }
+  }
+}

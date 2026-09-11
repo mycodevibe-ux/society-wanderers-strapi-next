@@ -1,0 +1,42 @@
+[
+  {
+    "referenceId": "HSC-4Z1ZT3",
+    "type": "Club Membership Application",
+    "submittedAt": "2026-09-11T07:27:19.823Z",
+    "fullName": "Test Member",
+    "email": "member@example.com"
+  },
+  {
+    "referenceId": "HSW-GPLSH5",
+    "submittedAt": "2026-09-11T07:27:18.483Z",
+    "fullName": "Test Contact",
+    "email": "contact@example.com",
+    "message": "Hello"
+  },
+  {
+    "referenceId": "HSW-WPCWD6",
+    "submittedAt": "2026-09-11T07:27:18.406Z",
+    "fullName": "Test User",
+    "email": "test@example.com",
+    "destination": "Paris"
+  },
+  {
+    "referenceId": "HSW-23O1A4",
+    "submittedAt": "2026-09-11T07:26:42.535Z",
+    "fullName": "Lord Sterling",
+    "email": "sterling@mayfair.com",
+    "subject": "Superyacht Charter inquiry",
+    "message": "We require a 60m yacht charter in Corsica this August."
+  },
+  {
+    "referenceId": "HSW-W7TLWM",
+    "submittedAt": "2026-09-11T07:26:40.368Z",
+    "fullName": "Lady Eleanor Vance",
+    "email": "eleanor@vance-holdings.co.uk",
+    "phone": "+44 20 7946 0192",
+    "destination": "Amalfi Coast & Capri",
+    "travelDates": "July 14 - 28, 2026",
+    "partySize": "Family (3-5)",
+    "investmentRange": "$50,000+"
+  }
+]

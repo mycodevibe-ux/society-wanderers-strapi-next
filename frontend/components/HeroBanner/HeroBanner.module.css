@@ -1,0 +1,196 @@
+.hero {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.hero--large {
+  height: 100vh;
+  min-height: 600px;
+}
+
+.hero--medium {
+  height: 70vh;
+  min-height: 450px;
+}
+
+.hero--small {
+  height: 50vh;
+  min-height: 350px;
+}
+
+.imageWrapper {
+  position: absolute;
+  inset: 0;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: heroZoom 14s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes heroZoom {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(11, 21, 39, 0.7) 0%,
+    rgba(11, 21, 39, 0.3) 50%,
+    rgba(11, 21, 39, 0.1) 100%
+  );
+}
+
+.content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  z-index: 2;
+}
+
+.content--left {
+  align-items: flex-end;
+}
+
+.content--center {
+  align-items: center;
+  text-align: center;
+}
+
+.content--center .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+  padding-bottom: var(--space-3xl);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 9vw, 8rem);
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  color: var(--color-white);
+  max-width: 700px;
+  margin-bottom: var(--space-lg);
+  animation: heroTitleIn 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s backwards;
+}
+
+@keyframes heroTitleIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.subtitle {
+  font-family: var(--font-accent);
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-gold-light);
+  max-width: 500px;
+  line-height: 1.5;
+  animation: heroSubIn 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.45s backwards;
+}
+
+@keyframes heroSubIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.goldBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-gold), var(--color-gold-dark));
+  z-index: 3;
+  transform-origin: left;
+  animation: goldBarExpand 1.3s cubic-bezier(0.16, 1, 0.3, 1) 0.65s backwards;
+}
+
+@keyframes goldBarExpand {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero--large {
+    height: 80vh;
+    min-height: 520px;
+  }
+
+  .hero--medium {
+    height: 60vh;
+    min-height: 380px;
+  }
+
+  .hero--small {
+    height: 45vh;
+    min-height: 280px;
+  }
+  
+  .container {
+    padding: 0 var(--space-md);
+    padding-bottom: var(--space-2xl);
+  }
+
+  .title {
+    font-size: clamp(2.3rem, 8vw, 4.5rem);
+    margin-bottom: var(--space-md);
+  }
+
+  .subtitle {
+    font-size: clamp(0.95rem, 3.5vw, 1.25rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 1rem;
+    padding-bottom: 1.75rem;
+  }
+
+  .title {
+    font-size: clamp(2rem, 9.5vw, 2.8rem);
+    letter-spacing: -0.01em;
+  }
+
+  .subtitle {
+    font-size: 0.92rem;
+  }
+}

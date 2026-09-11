@@ -1,0 +1,61 @@
+{
+  "kind": "singleType",
+  "collectionName": "high_society_clubs",
+  "info": {
+    "singularName": "high-society-club",
+    "pluralName": "high-society-clubs",
+    "displayName": "High Society Club",
+    "description": "The High Society Club membership page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "heroTitle": {
+      "type": "string",
+      "required": true,
+      "default": "THE HIGH SOCIETY CLUB"
+    },
+    "heroSubtitle": {
+      "type": "text",
+      "default": "Private travel. Perfectly executed."
+    },
+    "heroImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "introHeading": {
+      "type": "string",
+      "default": "FOR THOSE ACCUSTOMED TO MORE."
+    },
+    "introText": {
+      "type": "richtext"
+    },
+    "membershipCTATitle": {
+      "type": "string",
+      "default": "Membership Has Its Privileges"
+    },
+    "membershipCTAText": {
+      "type": "text",
+      "default": "Travel should feel effortless, personal, and entirely without compromise. Begin a private conversation and discover the membership level designed for how you travel."
+    },
+    "membershipCTAButton": {
+      "type": "string",
+      "default": "REQUEST MEMBERSHIP CONSIDERATION"
+    },
+    "membershipImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    }
+  }
+}
