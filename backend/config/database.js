@@ -6,8 +6,15 @@ module.exports = ({ env }) => {
     return {
       connection: {
         client: 'postgres',
-        connection: env('DATABASE_URL'),
-        pool: { min: 0, max: 5 },
+        connection: {
+          connectionString: env('DATABASE_URL'),
+          ssl: env.bool('DATABASE_SSL', false)
+            ? { rejectUnauthorized: false }
+            : (env('DATABASE_URL').includes('render.com') || env('NODE_ENV') === 'production'
+              ? { rejectUnauthorized: false }
+              : false),
+        },
+        pool: { min: 0, max: 10 },
       },
     };
   }
