@@ -4,6 +4,7 @@ import Footer from '../components/Footer/Footer';
 import HeroBanner from '../components/HeroBanner/HeroBanner';
 import StatsSection from '../components/StatsSection/StatsSection';
 import ScrollReveal from '../components/ScrollReveal/ScrollReveal';
+import { fetchAPI, getStrapiMedia } from '../lib/strapi';
 import styles from './page.module.css';
 
 /* Fallback data matching design/home.jpg */
@@ -25,7 +26,6 @@ const FALLBACK_STATS = [
   { value: 'No', label: 'COMPROMISE' },
 ];
 
-/* Fallback articles matching design/home.jpg */
 const FALLBACK_ARTICLES = [
   {
     title: 'The Psychology Behind Modern Luxury Travel',
@@ -63,23 +63,73 @@ export const metadata = {
   description: 'Private Travel Advisory for the Exceptionally Well Traveled. Bespoke luxury travel experiences, concierge services, and exclusive membership.',
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  // Fetch dynamic data from Strapi CMS
+  const [homepageRes, servicesRes, articlesRes, socialsRes] = await Promise.allSettled([
+    fetchAPI('/homepage', {
+      'populate[heroImage]': '*',
+      'populate[testimonialAvatar]': '*',
+      'populate[stats]': '*',
+      'populate[seo][populate]': '*',
+    }),
+    fetchAPI('/services', { populate: '*', sort: 'order:asc' }),
+    fetchAPI('/articles', { populate: '*', sort: 'publishedDate:desc', 'pagination[limit]': '3' }),
+    fetchAPI('/social-feed-items', { populate: '*', sort: 'order:asc' }),
+  ]);
+
+  const hp = homepageRes.status === 'fulfilled' && homepageRes.value?.data ? homepageRes.value.data : null;
+  const rawServices = servicesRes.status === 'fulfilled' && servicesRes.value?.data ? servicesRes.value.data : null;
+  const rawArticles = articlesRes.status === 'fulfilled' && articlesRes.value?.data ? articlesRes.value.data : null;
+  const rawSocials = socialsRes.status === 'fulfilled' && socialsRes.value?.data ? socialsRes.value.data : null;
+
+  // Map dynamic services with CMS images
+  const servicesList = rawServices && rawServices.length > 0
+    ? rawServices.map((s, idx) => ({
+        title: s.title,
+        slug: s.slug,
+        image: getStrapiMedia(s.image, FALLBACK_SERVICES[idx]?.image || '/images/b1.png'),
+      }))
+    : FALLBACK_SERVICES;
+
+  // Map dynamic articles with CMS images
+  const articlesList = rawArticles && rawArticles.length > 0
+    ? rawArticles.map((a, idx) => ({
+        title: a.title,
+        slug: a.slug,
+        category: a.category || 'THE JOURNAL',
+        date: a.publishedDate ? new Date(a.publishedDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }).toUpperCase() : 'APRIL 2026',
+        image: getStrapiMedia(a.coverImage, FALLBACK_ARTICLES[idx]?.image || '/images/j1.png'),
+      }))
+    : FALLBACK_ARTICLES;
+
+  // Map dynamic social items with CMS images
+  const socialsList = rawSocials && rawSocials.length > 0
+    ? rawSocials.map((soc, idx) => ({
+        title: soc.title || 'HSW Global Instagram',
+        image: getStrapiMedia(soc.image, FALLBACK_SOCIALS[idx]?.image || '/images/social1.png'),
+      }))
+    : FALLBACK_SOCIALS;
+
+  const statsList = hp?.stats && hp.stats.length > 0 ? hp.stats : FALLBACK_STATS;
+  const heroImgSrc = hp?.heroImage ? getStrapiMedia(hp.heroImage, '/images/banner.png') : '/images/banner.png';
+  const avatarSrc = hp?.testimonialAvatar ? getStrapiMedia(hp.testimonialAvatar, '/images/Ellipse 97.png') : '/images/Ellipse 97.png';
+
   return (
     <>
       <Header />
 
       {/* ===== HERO ===== */}
       <HeroBanner
-        title="HSW GLOBAL"
-        subtitle="Private Travel Advisory for the Exceptionally Well Traveled"
-        imageSrc="/images/banner.png"
+        title={hp?.heroTitle || 'HSW GLOBAL'}
+        subtitle={hp?.heroSubtitle || 'Private Travel Advisory for the Exceptionally Well Traveled'}
+        imageSrc={heroImgSrc}
         height="large"
       />
 
       {/* ===== SIGNATURE SERVICE ===== */}
       <section className={styles.signatureSection} id="signature-services">
         <ScrollReveal animation="fade-up" duration={900} className={styles.signatureHeader}>
-          <h2 className={styles.signatureTitle}>SIGNATURE SERVICE</h2>
+          <h2 className={styles.signatureTitle}>{hp?.signatureServiceTitle || 'SIGNATURE SERVICE'}</h2>
         </ScrollReveal>
 
         <ScrollReveal
@@ -88,7 +138,7 @@ export default function HomePage() {
           duration={850}
           className={styles.serviceGrid}
         >
-          {FALLBACK_SERVICES.map((service, idx) => (
+          {servicesList.map((service, idx) => (
             <Link key={idx} href={`/services/${service.slug}`} className={styles.serviceCard}>
               <img src={service.image} alt={service.title} className={styles.serviceCardImg} />
               <div className={styles.serviceCardOverlay}>
@@ -101,7 +151,6 @@ export default function HomePage() {
 
       {/* ===== THE HIGH SOCIETY CLUB ===== */}
       <section className={styles.clubSection} id="club-teaser">
-        {/* Top Banner with Red Lacquer Table, Candle & Book */}
         <ScrollReveal animation="fade-scale" duration={950} className={styles.clubBanner}>
           <img
             src="/images/sociatyClub.png"
@@ -115,11 +164,9 @@ export default function HomePage() {
           </div>
         </ScrollReveal>
 
-        {/* 2-Column Content: Left Single Image, Right Mission Bullets & CTAs */}
         <div className={styles.clubMainArea}>
           <div className={styles.container}>
             <div className={styles.clubGrid}>
-              {/* Left: Single Member Image */}
               <ScrollReveal animation="fade-right" duration={950} className={styles.clubImageCol}>
                 <div className={styles.clubImageWrapper}>
                   <img
@@ -130,10 +177,9 @@ export default function HomePage() {
                 </div>
               </ScrollReveal>
 
-              {/* Right: Title, 5 Mission Bullets, and Dual CTAs */}
               <div className={styles.clubInfoCol}>
                 <ScrollReveal animation="fade-up" duration={800}>
-                  <h3 className={styles.clubHeading}>High Society Club</h3>
+                  <h3 className={styles.clubHeading}>{hp?.clubSectionTitle || 'High Society Club'}</h3>
                 </ScrollReveal>
 
                 <ScrollReveal
@@ -172,7 +218,7 @@ export default function HomePage() {
             </div>
 
             {/* Stats (Animated in Viewport) */}
-            <StatsSection stats={FALLBACK_STATS} />
+            <StatsSection stats={statsList} />
           </div>
         </div>
       </section>
@@ -182,16 +228,16 @@ export default function HomePage() {
         <div className={styles.container}>
           <ScrollReveal animation="fade-scale" duration={950}>
             <blockquote className={styles.testimonialQuote}>
-              &ldquo;Working With Loren At HSW Global Made This Trip Completely Seamless From Start To Finish. Every Detail Was Thoughtfully Planned, Allowing Us To Fully Relax And Enjoy The Experience Without Any Stress.&rdquo;
+              &ldquo;{hp?.testimonialQuote || 'Working With Loren At HSW Global Made This Trip Completely Seamless From Start To Finish. Every Detail Was Thoughtfully Planned, Allowing Us To Fully Relax And Enjoy The Experience Without Any Stress.'}&rdquo;
             </blockquote>
           </ScrollReveal>
 
           <ScrollReveal animation="fade-up" delay={200} duration={850} className={styles.testimonialAuthor}>
             <div className={styles.authorMeta}>
-              <img src="/images/Ellipse 97.png" alt="Lawrence N." className={styles.testimonialAvatar} />
+              <img src={avatarSrc} alt={hp?.testimonialAuthor || 'Lawrence N.'} className={styles.testimonialAvatar} />
               <div>
-                <p className={styles.authorName}>Lawrence N.</p>
-                <p className={styles.authorRole}>Travel by Cruise</p>
+                <p className={styles.authorName}>{hp?.testimonialAuthor || 'Lawrence N.'}</p>
+                <p className={styles.authorRole}>{hp?.testimonialRole || 'Travel by Cruise'}</p>
               </div>
             </div>
             <Link href="/begin-your-journey" className={styles.testimonialCta}>
@@ -205,7 +251,7 @@ export default function HomePage() {
       <section className={styles.journalSection} id="journal-preview">
         <div className={styles.container}>
           <ScrollReveal animation="fade-up" duration={850}>
-            <h2 className={styles.journalTitle}>THE JOURNAL</h2>
+            <h2 className={styles.journalTitle}>{hp?.journalSectionTitle || 'THE JOURNAL'}</h2>
           </ScrollReveal>
 
           <ScrollReveal
@@ -214,7 +260,7 @@ export default function HomePage() {
             duration={850}
             className={styles.journalGrid}
           >
-            {FALLBACK_ARTICLES.map((article, i) => (
+            {articlesList.map((article, i) => (
               <Link key={i} href={`/journal/${article.slug}`} className={styles.journalCard}>
                 <div className={styles.journalCardImage}>
                   <img src={article.image} alt={article.title} />
@@ -235,7 +281,7 @@ export default function HomePage() {
       <section className={styles.socialSection} id="social-feed">
         <div className={styles.container}>
           <ScrollReveal animation="fade-up" duration={850}>
-            <h2 className={styles.socialTitle}>SOCIAL FEED</h2>
+            <h2 className={styles.socialTitle}>{hp?.socialFeedTitle || 'SOCIAL FEED'}</h2>
           </ScrollReveal>
 
           <ScrollReveal
@@ -244,7 +290,7 @@ export default function HomePage() {
             duration={850}
             className={styles.socialGrid}
           >
-            {FALLBACK_SOCIALS.map((item, i) => (
+            {socialsList.map((item, i) => (
               <a
                 key={i}
                 href="https://instagram.com"
@@ -253,7 +299,6 @@ export default function HomePage() {
                 className={styles.socialItem}
               >
                 <img src={item.image} alt={item.title || 'HSW Global Instagram'} />
-                {/* Reel UI Overlay Badges matching design */}
                 <div className={styles.reelBadge}>
                   <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zm0 12.5c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>

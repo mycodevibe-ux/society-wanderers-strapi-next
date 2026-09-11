@@ -3,9 +3,10 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import HeroBanner from '../../components/HeroBanner/HeroBanner';
 import ScrollReveal from '../../components/ScrollReveal/ScrollReveal';
+import { fetchAPI, getStrapiMedia } from '../../lib/strapi';
 import styles from './page.module.css';
 
-const FEATURED_ARTICLE = {
+const FALLBACK_FEATURED = {
   category: 'Featured · Essay · April 2026',
   title: 'The Psychology Behind Modern Luxury Travel',
   excerpt: 'Modern luxury travel is no longer defined solely by exclusivity or extravagance. It is increasingly shaped by emotion, meaning, and personal connection. Today\'s travelers seek experiences that create a sense of escape, restoration, and discovery journeys that align with how they want to feel rather than simply where they want to go. Privacy, time, authenticity, and thoughtful personalization have become the new markers of luxury, reflecting a shift from collecting destinations to creating experiences that feel deeply individual and genuinely memorable.',
@@ -13,7 +14,7 @@ const FEATURED_ARTICLE = {
   slug: 'psychology-behind-modern-luxury-travel',
 };
 
-const ARTICLES = [
+const FALLBACK_ARTICLES = [
   { title: 'World Cup 2026: The Essential Guide To Tickets...', image: '/images/b1.png', category: 'THE JOURNAL / TRAVEL INSPIRATION', slug: 'world-cup-2026-guide' },
   { title: "Insider's Guide To Argentina", image: '/images/b2.png', category: 'THE JOURNAL / TRAVEL INSPIRATION', slug: 'insiders-guide-argentina' },
   { title: "Insider's Guide To Madrid", image: '/images/b4.png', category: 'THE JOURNAL / TRAVEL INSPIRATION', slug: 'insiders-guide-madrid' },
@@ -27,15 +28,48 @@ export const metadata = {
   description: 'Essays, field notes, and quiet recommendations written for the well traveled. Explore luxury travel insights from HSW Global.',
 };
 
-export default function JournalPage() {
+export default async function JournalPage() {
+  const [pageRes, articlesRes] = await Promise.allSettled([
+    fetchAPI('/journal-page', { 'populate[heroImage]': '*' }),
+    fetchAPI('/articles', { populate: '*', sort: 'publishedDate:desc' }),
+  ]);
+
+  const pageData = pageRes.status === 'fulfilled' && pageRes.value?.data ? pageRes.value.data : null;
+  const rawArticles = articlesRes.status === 'fulfilled' && articlesRes.value?.data ? articlesRes.value.data : null;
+
+  const heroImg = pageData?.heroImage ? getStrapiMedia(pageData.heroImage, '/images/banner2.png') : '/images/banner2.png';
+
+  let featuredArticle = FALLBACK_FEATURED;
+  let articlesList = FALLBACK_ARTICLES;
+
+  if (rawArticles && rawArticles.length > 0) {
+    const featuredItem = rawArticles.find((a) => a.isFeatured) || rawArticles[0];
+    const regularItems = rawArticles.filter((a) => a.id !== featuredItem.id);
+
+    featuredArticle = {
+      category: `${featuredItem.category || 'Featured'} · Essay`,
+      title: featuredItem.title,
+      excerpt: featuredItem.excerpt || '',
+      image: getStrapiMedia(featuredItem.coverImage, '/images/b3.png'),
+      slug: featuredItem.slug,
+    };
+
+    articlesList = regularItems.map((a, idx) => ({
+      title: a.title,
+      image: getStrapiMedia(a.coverImage, FALLBACK_ARTICLES[idx % FALLBACK_ARTICLES.length]?.image || '/images/b1.png'),
+      category: a.category || 'THE JOURNAL / TRAVEL INSPIRATION',
+      slug: a.slug,
+    }));
+  }
+
   return (
     <>
       <Header />
       
       <HeroBanner
-        title="NOTES FROM THE ROAD"
-        subtitle="Essays, field notes, and quiet recommendations written for the well traveled."
-        imageSrc="/images/banner2.png"
+        title={pageData?.heroTitle || 'NOTES FROM THE ROAD'}
+        subtitle={pageData?.heroSubtitle || 'Essays, field notes, and quiet recommendations written for the well traveled.'}
+        imageSrc={heroImg}
         height="medium"
       />
 
@@ -44,13 +78,13 @@ export default function JournalPage() {
         <div className={styles.container}>
           <ScrollReveal animation="fade-scale" duration={950} className={styles.featuredCard}>
             <div className={styles.featuredImage}>
-              <img src={FEATURED_ARTICLE.image} alt={FEATURED_ARTICLE.title} />
+              <img src={featuredArticle.image} alt={featuredArticle.title} />
             </div>
             <div className={styles.featuredContent}>
-              <p className={styles.featuredCategory}>{FEATURED_ARTICLE.category}</p>
-              <h2 className={styles.featuredTitle}>{FEATURED_ARTICLE.title}</h2>
-              <p className={styles.featuredExcerpt}>{FEATURED_ARTICLE.excerpt}</p>
-              <Link href={`/journal/${FEATURED_ARTICLE.slug}`} className="btn btn--primary">
+              <p className={styles.featuredCategory}>{featuredArticle.category}</p>
+              <h2 className={styles.featuredTitle}>{featuredArticle.title}</h2>
+              <p className={styles.featuredExcerpt}>{featuredArticle.excerpt}</p>
+              <Link href={`/journal/${featuredArticle.slug}`} className="btn btn--primary">
                 READ MORE <span className="btn__arrow">→</span>
               </Link>
             </div>
@@ -67,12 +101,14 @@ export default function JournalPage() {
             duration={850}
             className={styles.articlesGrid}
           >
-            {ARTICLES.map((article, i) => (
+            {articlesList.map((article, i) => (
               <Link key={i} href={`/journal/${article.slug}`} className={styles.articleCard}>
                 <div className={styles.articleImage}>
                   <img src={article.image} alt={article.title} />
                 </div>
-                <p className={styles.articleCategory}>{article.category}</p>
+                <div className={styles.articleMeta}>
+                  <span className={styles.articleCategory}>{article.category}</span>
+                </div>
                 <h3 className={styles.articleTitle}>{article.title}</h3>
               </Link>
             ))}

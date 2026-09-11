@@ -3,9 +3,10 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import HeroBanner from '../../components/HeroBanner/HeroBanner';
 import ScrollReveal from '../../components/ScrollReveal/ScrollReveal';
+import { fetchAPI, getStrapiMedia } from '../../lib/strapi';
 import styles from './page.module.css';
 
-const SERVICES = [
+const FALLBACK_SERVICES = [
   { number: '01', title: 'Hotels, Resorts & Private Villas', image: '/images/a1.png', slug: 'hotels-resorts-private-villas' },
   { number: '02', title: 'Cruises, Sailing & Private Charters', image: '/images/a2.png', slug: 'cruises-sailing-private-charters' },
   { number: '03', title: 'Weddings & Honeymoons', image: '/images/a3.png', slug: 'weddings-honeymoons' },
@@ -21,14 +22,34 @@ export const metadata = {
   description: 'Explore our signature travel services — from luxury hotels and private villas to yacht charters, private flights, weddings, and curated cultural experiences.',
 };
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const [pageRes, servicesRes] = await Promise.allSettled([
+    fetchAPI('/services-page', { 'populate[heroImage]': '*' }),
+    fetchAPI('/services', { populate: '*', sort: 'order:asc' }),
+  ]);
+
+  const pageData = pageRes.status === 'fulfilled' && pageRes.value?.data ? pageRes.value.data : null;
+  const rawServices = servicesRes.status === 'fulfilled' && servicesRes.value?.data ? servicesRes.value.data : null;
+
+  const heroImg = pageData?.heroImage ? getStrapiMedia(pageData.heroImage, '/images/services.png') : '/images/services.png';
+
+  const servicesList = rawServices && rawServices.length > 0
+    ? rawServices.map((s, idx) => ({
+        number: s.number || String(idx + 1).padStart(2, '0'),
+        title: s.title,
+        slug: s.slug,
+        image: getStrapiMedia(s.image, FALLBACK_SERVICES[idx]?.image || '/images/a1.png'),
+      }))
+    : FALLBACK_SERVICES;
+
   return (
     <>
       <Header />
       
       <HeroBanner
-        title="WANDER BEAUTIFULLY"
-        imageSrc="/images/services.png"
+        title={pageData?.heroTitle || 'WANDER BEAUTIFULLY'}
+        subtitle={pageData?.heroSubtitle || ''}
+        imageSrc={heroImg}
         height="medium"
       />
 
@@ -40,7 +61,7 @@ export default function ServicesPage() {
             duration={850}
             className={styles.servicesGrid}
           >
-            {SERVICES.map((service) => (
+            {servicesList.map((service) => (
               <Link
                 key={service.number}
                 href={`/services/${service.slug}`}
